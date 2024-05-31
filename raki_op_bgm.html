@@ -2,7 +2,7 @@
 <HEAD>
 <TITLE>らき☆すた OP</TITLE>
 <SCRIPT language="JavaScript">
-<!--
+
 var cnt = 0;                   // 描画フレーム番号
 var cnt_= 0;                   // 1ループ前の描画フレーム番号
 var dat = new Array(2520);
@@ -10,20 +10,21 @@ var fps = 29.970;              // 目標フレームレート
 var stime = 0;                 // 開始時刻
 var ntime = 0;                 // 現在時刻
 var state = 1;                 // 再生状態 (0:再生, 1:停止, 2:一時停止)
+var audio;
 
 function Play()
 {
     if(state == 1){
         cnt = 0;
         stime = new Date();
-        wmp.CurrentPosition = 0;
+        audio.currentTime = 0;
     }
     else if(state == 2){
         stime = new Date() - cnt * 1000 / fps;
     }
 
     state = 0;
-    wmp.play();
+    audio.play();
     Draw();
 }
 
@@ -31,7 +32,7 @@ function Pause()
 {
     if(state == 0){
         state = 2;
-        wmp.pause();
+        audio.pause();
     }
 }
 
@@ -41,8 +42,8 @@ function Stop()
     cnt_ = cnt;
     state = 1;
     ntime = stime;
-    wmp.stop();
-    wmp.CurrentPosition = 0;
+    audio.pause();
+    audio.currentTime = 0;
     DrawMain();
 }
 
@@ -55,7 +56,7 @@ function Draw()
     if((cnt >= dat.length) || (state == 1)){
         cnt = 0;
         Pause();
-        wmp.CurrentPosition = 0;
+        audio.currentTime = 0;
     }
     else{
         DrawMain();
@@ -79,7 +80,13 @@ function DrawMain()
 
     document.all("canvas").innerHTML = "<PRE>" + dat[cnt] + "</PRE>";
 }
-//-->
+
+window.onload = function() {
+    audio = document.getElementById('audio');
+    DrawMain();
+};
+
+
 </SCRIPT>
 
 <SCRIPT language="JavaScript" src="./js/00000.js"></SCRIPT>
@@ -2604,7 +2611,7 @@ function DrawMain()
 <SCRIPT language="JavaScript" src="./js/02519.js"></SCRIPT>
 
 <STYLE>
-<!--
+
 BODY{
     background-color:  #FFFFFF;
     color:             #000000;
@@ -2616,18 +2623,13 @@ PRE{
     line-height:       10px;
     letter-spacing:    0px;
 }
---//>
+
 </STYLE>
 </HEAD>
 
 
-<BODY onLoad="DrawMain();">
-<OBJECT classid="clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95" id="wmp">
-<PARAM name="ShowControls" value="false">
-<PARAM name="AutoStart" value="false">
-<PARAM name="Filename" value="./bgm.mp3">
-<PARAM name="AutoRewind" value="true">
-</OBJECT>
+<BODY>
+<audio id="audio" src="./bgm.mp3" preload="auto"></audio>
 <DIV style="font-size:12px; padding-left:10px;">
 <INPUT type="button" onClick="Play()" value=" Play ">&nbsp;
 <INPUT type="button" onClick="Stop()" value=" Stop ">&nbsp;
