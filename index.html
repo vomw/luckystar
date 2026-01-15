@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta http-equiv="refresh" content="0; url=raki_op_bgm.html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>リダイレクト中...</title>
+    <meta charset="UTF-8">
+    <title>らき☆すた OP</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <p>自動的にリダイレクトされない場合は、<a href="raki_op_bgm.html">このリンク</a>をクリックしてください。</p>
+    <div id="canvas"></div>
+    <div id="controls">
+        <audio id="audio" src="bgm.mp3"></audio>
+        <button onclick="Play()">Play</button>
+        <button onclick="Pause()">Pause</button>
+        <button onclick="Stop()">Stop</button>
+    </div>
+    <div id="info">
+        Frame: <span id="info_pfrm">0</span> / <span id="info_tfrm">0</span> |
+        Time: <span id="info_ptim">0:00</span> / <span id="info_ttim">0:00</span> |
+        Skip: <span id="info_skip">0</span>
+    </div>
+    <script src="animation.js"></script>
 </body>
-
 </html>

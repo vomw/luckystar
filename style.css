@@ -1,0 +1,19 @@
+body {
+    background-color: #f0f0f0;
+    font-family: monospace;
+}
+#canvas {
+    white-space: pre;
+    font-size: 12px;
+    line-height: 1.2;
+    margin: 0 auto;
+    width: fit-content;
+}
+#controls {
+    text-align: center;
+    margin: 10px 0;
+}
+#info {
+    text-align: center;
+    margin-bottom: 10px;
+}
